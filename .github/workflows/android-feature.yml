@@ -14,4 +14,5 @@ jobs:
       with:
         java-version: 1.8
     - name: Main Build
-      run: bash cd ./android && ./gradlew :virocore:assembleRelease
+      run: bash ./gradlew :virocore:assembleRelease
+      working-directory: ./android
