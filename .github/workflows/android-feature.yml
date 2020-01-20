@@ -13,5 +13,5 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Main Test
-      run: bash ./gradlew
+    - name: Main Build
+      run: bash ./android/gradlew :virocore:assembleRelease
