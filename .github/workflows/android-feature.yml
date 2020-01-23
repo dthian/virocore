@@ -27,7 +27,7 @@ on: [push]
 #       env:
 #         destination: ${{ matrix.destination }}
 #         DEVELOPER_DIR: ${{ matrix.xcode }}
-###### IoS Without fastlane #####
+###### IoS Without fastlane ######
 jobs:
   verifyCondition:
     runs-on: ubuntu-latest
