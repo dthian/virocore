@@ -6,36 +6,58 @@ jobs:
   build:
     # This job runs on macOS
     runs-on: macos-latest
-    strategy:
-      matrix:
-        destination: ['platform=iOS Simulator,OS=13.1,name=iPhone 8']
-        xcode: ['/Applications/Xcode_11.1.app/Contents/Developer']
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Bundle Install
-        run: bundle check || bundle install
-        env:
-          BUNDLE_JOBS: 4
-          BUNDLE_RETRY: 3
-          BUNDLE_GITHUB__COM: x-access-token:${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
-      - name: Dependencies
-        run: |
-          carthage bootstrap --no-use-binaries --platform iOS --cache-builds
-          bundle exec pod install
-        env:
-          DEVELOPER_DIR: ${{ matrix.xcode }}
-      - name: Build and test
-        run: bundle exec fastlane scan --destination "${destination}" --scheme "YOUR_APP_SCHEME"
-        env:
-          destination: ${{ matrix.destination }}
-          DEVELOPER_DIR: ${{ matrix.xcode }}
-      - name: Archive Failed Tests artifacts
-        if: failure()
-        uses: actions/upload-artifact@v1
+      - uses: actions/checkout@v1
+      
+      - name: Install gpg
+        run: brew install gnupg
+        
+      - name: Switch XCode Version
+        run: sudo xcode-select -s /Applications/Xcode_11.2.app
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v1
         with:
-          name: FailureDiff
-          path: YouAppTests/FailureDiffs
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
+      - name: Install yarn dependencies
+        run: yarn install --frozen-lockfile
+      - name: Cache Pods dependencies
+        uses: actions/cache@v1
+        with:
+          path: ios/Pods
+          key: ${{ runner.OS }}-pods-cache-${{ hashFiles('**/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-pods-cache-
+      - name: Install pod dependencies
+        run: |
+          cd ios
+          pod install
+        shell: bash
+      - name: Setup provisioning profile
+        run: ./.github/secrets/decrypt_secrets.sh
+        env:
+          IOS_PROFILE_KEY: ${{ secrets.IOS_PROFILE_KEY }}
+      - name: Build app
+        run: |
+          cd ios && xcodebuild archive \
+            -workspace appname.xcworkspace \
+            -scheme appname \
+            -sdk iphoneos13.2 \
+            -configuration Release \
+            -archivePath $PWD/build/appname.xcarchive \
+            IPHONEOS_DEPLOYMENT_TARGET=9.0
+            PROVISIONING_PROFILE="UUID HERE" \
+            CODE_SIGN_IDENTITY="iPhone Distribution: Some Company (T343ff)"
+      - name: Export app
+        run: |
+          cd ios && xcodebuild \
+            -exportArchive \
+            -archivePath $PWD/build/appname.xcarchive \
+            -exportOptionsPlist $PWD/ci.plist \
+            -exportPath $PWD/build
   #    - name: Releasing
   #      run: bundle exec fastlane release
   #      env:
