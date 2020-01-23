@@ -14,10 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Bundle Install
-        run: |
-          gem install bundler
-          bundle install
+        run: bundle check || bundle install
         env:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
           BUNDLE_GITHUB__COM: x-access-token:${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
       - name: Dependencies
         run: |
