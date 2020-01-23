@@ -29,6 +29,11 @@ on: [push]
 #         DEVELOPER_DIR: ${{ matrix.xcode }}
 ###### IoS Without fastlane #####
 jobs:
+  verifyCondition:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print
+        run: bash echo verifyCondition testing...
   ios_build:
     # This job runs on macOS
     runs-on: macos-latest
