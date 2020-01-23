@@ -20,7 +20,8 @@ jobs:
           pod install --verbose
         shell: bash
       - name: Setup provisioning profile
-        run: ./.github/secrets/decrypt_secrets.sh
+        run: ./decrypt_secrets.sh
+        working-directory: ./.github/secrets/
         env:
           IOS_PROFILE_KEY: ${{ secrets.IOS_PROFILE_KEY }}
       - name: Build app
