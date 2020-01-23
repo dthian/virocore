@@ -34,11 +34,11 @@ jobs:
         with:
           name: FailureDiff
           path: YouAppTests/FailureDiffs
-      - name: Releasing
-        run: bundle exec fastlane release
-        env:
-          DEVELOPER_DIR: ${{ matrix.xcode }}
-          YOUR_ENVIRONMENT_VARIABLES_HERE: ${{ "secret.XXX" }}
+  #    - name: Releasing
+  #      run: bundle exec fastlane release
+  #      env:
+  #        DEVELOPER_DIR: ${{ matrix.xcode }}
+  #        YOUR_ENVIRONMENT_VARIABLES_HERE: ${{ "secret.XXX" }}
 
 ###### Android #####
 
