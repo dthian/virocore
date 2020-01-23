@@ -1,4 +1,4 @@
-name: CI
+name: Viro Renderer Build
 
 on: [push]
 
@@ -29,23 +29,21 @@ on: [push]
 #         DEVELOPER_DIR: ${{ matrix.xcode }}
 ###### IoS Without fastlane #####
 jobs:
-  mac_build:
+  ios_build:
     # This job runs on macOS
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
-      
       - name: Install gpg
         run: brew install gnupg
-        
-      - name: Switch XCode Version
+      - name: Set XCode Version 11.2
         run: sudo xcode-select -s /Applications/Xcode_11.2.app
       - name: Install pod dependencies
         run: |
           cd ios
           pod install --verbose
         shell: bash
-      - name: Build app
+      - name: xcodebuild framework
         run: |
           cd ios && xcodebuild \
             -workspace ViroRenderer.xcworkspace \
@@ -62,7 +60,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Main Build
+    - name: assmble release
       run: bash ./gradlew :virocore:assembleRelease
       working-directory: ./android
 ###### Android #####
