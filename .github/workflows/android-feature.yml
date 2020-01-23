@@ -1,4 +1,4 @@
-name: Viro Renderer Build
+name: RendererBuild
 
 on: [push]
 
