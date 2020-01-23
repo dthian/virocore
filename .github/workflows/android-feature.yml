@@ -47,12 +47,11 @@ jobs:
         shell: bash
       - name: Build app
         run: |
-          cd ios && xcodebuild archive \
+          cd ios && xcodebuild clean \
             -workspace ViroRenderer.xcworkspace \
             -scheme ViroKit \
             -sdk iphoneos13.2 \
-            -configuration Release \
-            -archivePath $PWD/build/ViroRenderer.xcarchive \
+            -configuration Debug \
             IPHONEOS_DEPLOYMENT_TARGET=9.0
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="iPhone Distribution: Some Company (T343ff)"
