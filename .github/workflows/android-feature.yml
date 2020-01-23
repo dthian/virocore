@@ -3,11 +3,9 @@ name: CI
 on: [push]
 
 jobs:
-  test:
-    # Job name is Test
-    name: Test
+  build:
     # This job runs on macOS
-    runs-on: macOS-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         destination: ['platform=iOS Simulator,OS=13.1,name=iPhone 8']
