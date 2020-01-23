@@ -51,8 +51,8 @@ jobs:
             -workspace ViroRenderer.xcworkspace \
             -scheme ViroKit \
             -sdk iphoneos13.2 \
-            -configuration Debug \
-            IPHONEOS_DEPLOYMENT_TARGET=9.0
+            -configuration Release \
+            IPHONEOS_DEPLOYMENT_TARGET=9.0 \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="iPhone Distribution: Some Company (T343ff)"
       - name: Export app
