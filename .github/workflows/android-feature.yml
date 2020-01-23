@@ -17,7 +17,7 @@ jobs:
       - name: Install pod dependencies
         run: |
           cd ios
-          pod install
+          pod install --verbose
         shell: bash
       - name: Setup provisioning profile
         run: ./.github/secrets/decrypt_secrets.sh
