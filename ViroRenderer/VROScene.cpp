@@ -54,7 +54,7 @@ VROScene::VROScene() : VROThreadRestricted(VROThreadName::Renderer),
     ALLOCATION_TRACKER_ADD(Scenes, 1);
 }
 
-VROScene::~VROScene() {
+VROScene::~VRwfOScene() {
     ALLOCATION_TRACKER_SUB(Scenes, 1);
 }
 
