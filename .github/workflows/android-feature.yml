@@ -33,7 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print
-        run: bash echo verifyCondition testing...
+        run: echo verifyCondition testing...
+        if: "contains(github.event.head_commit.message, '[ViroReact]')"
   ios_build:
     # This job runs on macOS
     runs-on: macos-latest
