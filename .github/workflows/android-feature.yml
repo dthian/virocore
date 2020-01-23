@@ -19,11 +19,6 @@ jobs:
           cd ios
           pod install --verbose
         shell: bash
-      - name: Setup provisioning profile
-        run: ./decrypt_secrets.sh
-        working-directory: ./.github/secrets/
-        env:
-          IOS_PROFILE_KEY: ${{ secrets.IOS_PROFILE_KEY }}
       - name: Build app
         run: |
           cd ios && xcodebuild archive \
@@ -33,7 +28,7 @@ jobs:
             -configuration Release \
             -archivePath $PWD/build/appname.xcarchive \
             IPHONEOS_DEPLOYMENT_TARGET=9.0
-            PROVISIONING_PROFILE="UUID HERE" \
+            PROVISIONING_PROFILE=${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }} \
             CODE_SIGN_IDENTITY="iPhone Distribution: Some Company (T343ff)"
       - name: Export app
         run: |
