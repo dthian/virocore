@@ -1,7 +1,7 @@
 ### Releases
 ViroCore downloads are available on our [Releases](https://virocore.viromedia.com/docs/releases) page.
 
-[GITHUB-BADGE](https://github.com/dthian/virocore/workflows/RendererBuild/badge.svg)
+https://github.com/dthian/virocore/workflows/RendererBuild/badge.svg
 
 
 ViroCore
