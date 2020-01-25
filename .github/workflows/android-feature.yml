@@ -11,7 +11,7 @@ jobs:
         with:
           repository: dthian/viro
           ref: refs/heads/
-          token: ${{ secrets.my_pat }}
+#          token: ${{ secrets.my_pat }}
         
 #  verifyCondition:
 #    runs-on: ubuntu-latest
