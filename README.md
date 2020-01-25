@@ -1,12 +1,9 @@
-### Releases
-ViroCore downloads are available on our [Releases](https://virocore.viromedia.com/docs/releases) page.
-
-![RendererBuild](https://github.com/dthian/virocore/workflows/RendererBuild/badge.svg)
-
 ViroCore
 =====================
 
 ViroCore is SceneKit for Android, a 3D framework for developers to build immersive applications using Java. ViroCore combines a high-performance rendering engine with a descriptive API for creating 3D, AR, and VR apps. While lower-level APIs like OpenGL require you to precisely implement complex rendering algorithms, ViroCore requires only high-level scene descriptions, and code for the interactivity and animations you want your application to perform.
+
+![Viro Renderer CI Pipeline](https://github.com/dthian/virocore/workflows/Viro%20Renderer%20CI%20Pipeline/badge.svg)
 
 Platforms supported:
 Android, ARCore, Google Daydream, Samsung GearVR, Google Cardboard VR
@@ -14,6 +11,10 @@ Android, ARCore, Google Daydream, Samsung GearVR, Google Cardboard VR
 The repository contains both the rendering source code, and as well as the ViroCore platform. Both are free to use with no limits on distribution.
 
 To report bugs/issues with the Viro platform, please file new issues on this repository.
+
+### Releases
+ViroCore downloads are available on our [Releases](https://virocore.viromedia.com/docs/releases) page.
+
 
 ## Instructions for running sample code:
 
