@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: dthian/viro
-          ref: refs/heads/
+          ref: refs/heads/master
 #          token: ${{ secrets.my_pat }}
         
 #  verifyCondition:
