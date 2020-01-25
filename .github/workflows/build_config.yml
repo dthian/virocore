@@ -12,7 +12,7 @@ jobs:
 #          repository: dthian/viro
 #          ref: refs/heads/master
 
-        
+        #
 #  verifyCondition:
 #    runs-on: ubuntu-latest
 #    steps:
