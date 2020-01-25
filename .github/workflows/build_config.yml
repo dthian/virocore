@@ -1,4 +1,4 @@
-name: RendererBuild
+name: Viro Renderer CI Pipeline
 on: [push]
 
 ###### IoS Without fastlane ######
