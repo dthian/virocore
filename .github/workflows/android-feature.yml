@@ -11,8 +11,15 @@ jobs:
         with:
           repository: dthian/viro
           ref: refs/heads/master
-#          token: ${{ secrets.my_pat }}
+
+      - name: Update Bridge
+        uses: actions/checkout@master
+        with:
+          repository: dthian/viro
+          ref: refs/heads/master  
         
+#          token: ${{ secrets.my_pat }}
+#        
 #  verifyCondition:
 #    runs-on: ubuntu-latest
 #    steps:
