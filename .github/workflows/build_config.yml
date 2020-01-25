@@ -19,28 +19,28 @@ jobs:
 #      - name: print
 #        run: echo verifyCondition testing...
 #        if: "contains(github.event.head_commit.message, '[ViroReact]')"
-  ios_build:
-    # This job runs on macOS
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install gpg
-        run: brew install gnupg
-      - name: Set XCode Version 11.2
-        run: sudo xcode-select -s /Applications/Xcode_11.2.app
-      - name: Install pod dependencies
-        run: |
-          cd ios
-          pod install --verbose
-        shell: bash
-      - name: xcodebuild framework
-        run: |
-          cd ios && xcodebuild \
-            -workspace ViroRenderer.xcworkspace \
-            -scheme ViroKit \
-            -sdk iphoneos13.2 \
-            -configuration Release \
-            IPHONEOS_DEPLOYMENT_TARGET=9.0
+#  ios_build:
+#    # This job runs on macOS
+#    runs-on: macos-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Install gpg
+#        run: brew install gnupg
+#      - name: Set XCode Version 11.2
+#        run: sudo xcode-select -s /Applications/Xcode_11.2.app
+#      - name: Install pod dependencies
+#        run: |
+#          cd ios
+#          pod install --verbose
+#        shell: bash
+#      - name: xcodebuild framework
+#        run: |
+#          cd ios && xcodebuild \
+#            -workspace ViroRenderer.xcworkspace \
+#            -scheme ViroKit \
+#            -sdk iphoneos13.2 \
+#            -configuration Release \
+#            IPHONEOS_DEPLOYMENT_TARGET=9.0
            
 ##### Android #####            
   android_build:
@@ -54,3 +54,12 @@ jobs:
     - name: assmble release
       run: bash ./gradlew :virocore:assembleRelease
       working-directory: ./android
+
+    - name: Upload result
+      uses: actions/upload-artifact@v1
+      with: 
+        name: react-viro-test.tgz
+        path: ./viroreact/build/outputs/aar/viroreact-release.aar
+        
+        
+        
